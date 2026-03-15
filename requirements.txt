@@ -1,57 +1,8 @@
-# =============================
-# Streamlit
-# =============================
 streamlit==1.44.1
 streamlit-option-menu==0.4.0
-
-# =============================
-# Core Python utilities
-# =============================
-python-dotenv==1.0.1
+numpy==1.26.4
+Pillow==10.4.0
 requests==2.32.3
-rich==13.9.4
-tqdm==4.67.1
-
-# =============================
-# Numerical stack
-# =============================
-numpy>=1.26,<2.1
-pandas==2.2.3
-scipy==1.15.2
 scikit-learn==1.6.1
-
-# =============================
-# NLP / ML
-# =============================
-torch==2.6.0
-transformers==4.49.0
-sentence-transformers==3.4.1
-accelerate==1.4.0
-faiss-cpu==1.10.0
-
-# =============================
-# spaCy (DO NOT PIN INTERNALS)
-# =============================
-spacy==3.8.4
-spacy-curated-transformers==0.3.0
-
-# =============================
-# spaCy models
-# =============================
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
-en_core_web_trf @ https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.8.0/en_core_web_trf-3.8.0-py3-none-any.whl
-
-# =============================
-# Data / parsing
-# =============================
-beautifulsoup4==4.12.3
-pdfplumber==0.11.4
-pytesseract==0.3.13
-opencv-python==4.11.0.86
-
-# =============================
-# Visualization
-# =============================
-altair==5.5.0
-plotly==6.0.1
-matplotlib==3.10.1
+joblib==1.4.2
+tensorflow==2.19.0

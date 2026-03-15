@@ -1,10 +1,25 @@
 import streamlit as st
-import tensorflow as tf
 import numpy as np
 from PIL import Image
 
+try:
+    from tflite_runtime.interpreter import Interpreter  # type: ignore
+except ImportError:
+    try:
+        import tensorflow as tf
+        Interpreter = tf.lite.Interpreter
+    except ImportError:
+        Interpreter = None
+
 # Load TFLite model
-interpreter = tf.lite.Interpreter(model_path="plant_disease_model.tflite")
+if Interpreter is None:
+    st.error(
+        "Disease Detection requires TensorFlow Lite runtime. "
+        "Install `tflite-runtime` (preferred) or `tensorflow` to enable this page."
+    )
+    st.stop()
+
+interpreter = Interpreter(model_path="plant_disease_model.tflite")
 interpreter.allocate_tensors()
 
 # Get input and output details
@@ -36,7 +51,7 @@ uploaded_file = st.file_uploader("📤 Upload a leaf image", type=["jpg", "jpeg"
 def predict(image: Image.Image):
     image_resized = image.resize((128, 128))
     input_image = np.expand_dims(np.array(image_resized, dtype=np.float32), axis=0)
-    input_image = tf.cast(input_image, input_details[0]['dtype'])
+    input_image = input_image.astype(input_details[0]['dtype'])
 
     interpreter.set_tensor(input_details[0]['index'], input_image)
     interpreter.invoke()

@@ -3,19 +3,22 @@ import numpy as np
 from PIL import Image
 
 try:
-    from tflite_runtime.interpreter import Interpreter  # type: ignore
+    from ai_edge_litert.interpreter import Interpreter  # type: ignore
 except ImportError:
     try:
-        import tensorflow as tf
-        Interpreter = tf.lite.Interpreter
+        from tflite_runtime.interpreter import Interpreter  # type: ignore
     except ImportError:
-        Interpreter = None
+        try:
+            import tensorflow as tf
+            Interpreter = tf.lite.Interpreter
+        except ImportError:
+            Interpreter = None
 
 # Load TFLite model
 if Interpreter is None:
     st.error(
-        "Disease Detection requires TensorFlow Lite runtime. "
-        "Install `tflite-runtime` (preferred) or `tensorflow` to enable this page."
+        "Disease Detection requires a Lite interpreter runtime. "
+        "Install `ai-edge-litert` (preferred), `tflite-runtime`, or `tensorflow` to enable this page."
     )
     st.stop()
 

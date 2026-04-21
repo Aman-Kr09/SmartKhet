@@ -49,7 +49,18 @@ uploaded_file = st.file_uploader("📤 Upload a leaf image", type=["jpg", "jpeg"
 
 # Prediction function
 def predict(image: Image.Image):
-    image_resized = image.resize((128, 128))
+    input_shape = input_details[0]['shape']
+    input_height = int(input_shape[1]) if len(input_shape) > 2 and int(input_shape[1]) > 0 else 128
+    input_width = int(input_shape[2]) if len(input_shape) > 2 and int(input_shape[2]) > 0 else 128
+    input_channels = int(input_shape[3]) if len(input_shape) == 4 and int(input_shape[3]) > 0 else 3
+
+    # Match image channels with model input (e.g., RGB=3, grayscale=1).
+    if input_channels == 1:
+        image = image.convert("L")
+    else:
+        image = image.convert("RGB")
+
+    image_resized = image.resize((input_width, input_height))
     input_image = np.expand_dims(np.array(image_resized, dtype=np.float32), axis=0)
     input_image = input_image.astype(input_details[0]['dtype'])
 

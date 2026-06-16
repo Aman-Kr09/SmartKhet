@@ -4,6 +4,10 @@
 
 ---
 
+**LIVE LINK:** https://smartkhet-xheta9fcepldkzyngtyqmb.streamlit.app/
+
+---
+
 ## 🚀 Features
 
 - **🌱 Plant Disease Detection**  
